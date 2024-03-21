@@ -26,7 +26,6 @@ function SearchBar() {
         })
     }
 
-    console.log(filterdata);
   return (
     <div>
            

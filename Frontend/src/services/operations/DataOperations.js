@@ -1,9 +1,10 @@
 import  {toast} from "react-hot-toast"
 import {apiConnector} from "../apiConnector"
 import { dataEndPoints } from "../Apis"
-import { setData, setFilterSearch, updateData } from "../../slice/dataSlice"
+import { afterDeleteData, afterEditData, setData, setFilterSearch, updateData } from "../../slice/dataSlice"
 
 export async function getCardData(dispatch){
+    console.log("its here");
     const toastId=toast.loading("Loading...")
     try {
         const responce=await apiConnector("GET",dataEndPoints.GET_ALL_DATA)
@@ -12,6 +13,8 @@ export async function getCardData(dispatch){
         }
         toast.success("Data fetched")
         dispatch(setData(responce.data.data))
+        localStorage.setItem('CourtData', JSON.stringify(responce.data.data));
+
     } catch (error) {
         console.log(error);
         toast.error("Error while data fechting!")
@@ -28,13 +31,15 @@ export async function createCardData(data,dispatch,navigate){
         }
         toast.success("Data Created")
         console.log(responce);
-        // dispatch(updateData(responce?.data?.data))
+        dispatch(updateData(responce.data.data))
         navigate("/")
     } catch (error) {
         console.log(error);
         toast.error("Data Creation Failed")
     }
     toast.dismiss(toastId)
+    navigate("/")
+
 }
 
 export async function searchData(id){
@@ -53,7 +58,7 @@ export async function searchData(id){
 }
 
 
-export async function deleteCardData(id,navigate){
+export async function deleteCardData(id,navigate,dispatch){
     const toastId=toast.loading("Loading...")
     try {
         const responce=await apiConnector("DELETE",dataEndPoints.DELETE_DATA_API,{id})
@@ -61,16 +66,18 @@ export async function deleteCardData(id,navigate){
             throw new Error("Data deletion failed")
         }
         toast.success("Data Deleted")
+        dispatch(afterDeleteData(id))
         navigate("/")
     } catch (error) {
         console.log(error)
     }
     toast.dismiss(toastId)
+    navigate("/")
 }
 
 
 
-export async function editCardData(data,navigate){
+export async function editCardData(data,navigate,dispatch){
     const toastId=toast.loading("Loading...")
     console.log(data)
     try {
@@ -79,11 +86,13 @@ export async function editCardData(data,navigate){
             throw new Error("Failed while updating!")
         }
         toast.success("Updated")
-        navigate("/getAllData")
+        dispatch(afterEditData(responce.data.data))
+        navigate("/")
     } catch (error) {
         console.log(error);
     }
     toast.dismiss(toastId)
+    navigate("/")
 }
 
 

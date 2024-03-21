@@ -11,7 +11,7 @@ function Home() {
   const [toggleClick,setToggleClick]=useState(false)
 
   const currentDate = new Date().toLocaleDateString('en-GB');
-
+  console.log("home render");
  async function getData(){
     try {
       await getCardData(dispatch)

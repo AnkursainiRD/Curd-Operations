@@ -10,6 +10,7 @@ dbConnect().then(()=>{
 
 app.use(express.json())
 
+
 app.use(cors({
     origin:"https://curd-operations-frontend.vercel.app",
     methods:["POST","GET","DELETE"],

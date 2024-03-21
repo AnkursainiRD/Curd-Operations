@@ -5,6 +5,7 @@ import "./index.css"
 import CreateData from "./pages/CreateData"
 import AllData from "./pages/AllData"
 import EditData from "./pages/EditData"
+import ConfirmationModal from "./components/ConfirmationModal"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/createData" element={<CreateData/>}/>
           <Route path="/getAllData" element={<AllData/>}/>
           <Route path="/editData/:id" element={<EditData/>}/>
+          <Route path="/del" element={<ConfirmationModal/>}/>
        </Routes>
     </div>
   )

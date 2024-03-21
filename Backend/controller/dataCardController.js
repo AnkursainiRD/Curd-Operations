@@ -90,6 +90,7 @@ exports.editCardData=async(req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Data Updated",
+            data:updatedCard
             // data:updatedCard
         })
     } catch (error) {
