@@ -16,6 +16,19 @@ function AllData() {
     const navigate=useNavigate()
 
 
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+          event.preventDefault();
+          event.returnValue = ''; // Required for some browsers
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+      }, []);
+
     function deleteData(e){
         e.preventDefault()
         const cardId=e.target.value;
