@@ -30,7 +30,7 @@ function Home() {
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
       
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
-          <p class="uppercase tracking-loose w-full">AD Ritik</p>
+          <p class="uppercase tracking-loose w-full">Advocate Ritik</p>
           <h1 class="my-4 text-5xl font-bold leading-tight">
            Personal Site For Mainting The Valueble Data!
           </h1>
