@@ -11,7 +11,7 @@ dbConnect().then(()=>{
 app.use(express.json())
 
 app.use(cors({
-    origin:["https://curd-operation-pj.vercel.app"],
+    origin:"https://curd-operations-frontend.vercel.app",
     credentials:true
 }))
 app.use("/api/v1/card/",cardRoute)
