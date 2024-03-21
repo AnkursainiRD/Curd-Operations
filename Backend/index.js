@@ -12,6 +12,7 @@ app.use(express.json())
 
 app.use(cors({
     origin:"https://curd-operations-frontend.vercel.app",
+    methods:["POST","GET","DELETE"],
     credentials:true
 }))
 app.use("/api/v1/card/",cardRoute)
