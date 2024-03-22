@@ -1,10 +1,11 @@
 import  {toast} from "react-hot-toast"
 import {apiConnector} from "../apiConnector"
 import { dataEndPoints } from "../Apis"
-import { afterDeleteData, afterEditData, setData, setFilterSearch, updateData } from "../../slice/dataSlice"
+import { afterDeleteData, afterEditData, setData, setFilterSearch, setLoading, updateData } from "../../slice/dataSlice"
 
 export async function getCardData(dispatch){
     console.log("its here");
+    dispatch(setLoading(true))
     const toastId=toast.loading("Loading...")
     try {
         const responce=await apiConnector("GET",dataEndPoints.GET_ALL_DATA)
@@ -20,6 +21,7 @@ export async function getCardData(dispatch){
         toast.error("Error while data fechting!")
     }
     toast.dismiss(toastId)
+    dispatch(setLoading(false))
 }
 
 export async function createCardData(data,dispatch,navigate){

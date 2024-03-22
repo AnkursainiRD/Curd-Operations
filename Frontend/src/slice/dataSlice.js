@@ -4,7 +4,8 @@ const intitialState={
     loading:false,
     data:localStorage.getItem('CourtData')?JSON.parse(localStorage.getItem("CourtData")):[],
     fileterData:[],
-    foundData:null
+    foundData:null,
+    loading:false,
 }
 
 const dataSlice=createSlice({
@@ -16,6 +17,9 @@ const dataSlice=createSlice({
         },
         updateData:(state,action)=>{
             state.data.push(action.payload)
+        },
+        setLoading:(state,action)=>{
+            state.loading=action.payload
         },
         setFilterSearch:(state,action)=>{
             state.fileterData=[...action.payload]
@@ -40,5 +44,5 @@ const dataSlice=createSlice({
     }
 })
 
-export const {setData,updateData,setFilterSearch,findData,afterEditData,afterDeleteData}=dataSlice.actions;
+export const {setData,updateData,setFilterSearch,findData,afterEditData,afterDeleteData,setLoading}=dataSlice.actions;
 export default dataSlice.reducer
