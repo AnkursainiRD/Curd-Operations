@@ -10,10 +10,17 @@ function Home() {
   const dispatch=useDispatch()
   const {data,loading}=useSelector((state)=>state.data)
   const [toggleClick,setToggleClick]=useState(false)
+  const [cacheData,setCacheData]=useState(false)
   
 
   const currentDate = new Date().toLocaleDateString('en-GB');
   console.log("home render");
+
+  function handleCache(){
+    localStorage.removeItem("CourtData");
+    window.location.reload();
+  }
+
  async function getData(){
     try {
       await getCardData(dispatch)
@@ -42,9 +49,15 @@ function Home() {
             <p class="leading-normal text-2xl mb-8">
              Work related infromation are sotre in this site for provide the ease in working
             </p>
-            <Link to={'/createData'} class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+           
+           <div className='flex flex-row lg:flex-row lg:gap-5 md:gap-3 items-center justify-center w-full lg:justify-start'> 
+           <Link to={'/createData'} class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
               Create Data
             </Link>
+            <button onClick={handleCache} class="mx-auto ml-4 lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              Clear Cache
+            </button>
+           </div>
           </div>
           
           <div class="w-full md:w-3/5 py-6 text-center">

@@ -38,7 +38,7 @@ function TodayData({data}) {
         <label htmlFor="meerut">Meerut</label>
         <input onChange={handleChange} type="radio" name='tehsil' id='meerut' value="meerut"></input>
     </div>
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -95,8 +95,7 @@ function TodayData({data}) {
             
         </tbody>
     </table>
-</div>
-
+    </div>
     </div>
   )
 }
