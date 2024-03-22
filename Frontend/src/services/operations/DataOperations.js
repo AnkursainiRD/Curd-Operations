@@ -1,7 +1,7 @@
 import  {toast} from "react-hot-toast"
 import {apiConnector} from "../apiConnector"
 import { dataEndPoints } from "../Apis"
-import { afterDeleteData, afterEditData, setData, setFilterSearch, setLoading, updateData } from "../../slice/dataSlice"
+import { afterDeleteData, afterEditData, findData, setData, setFilterSearch, setLoading, updateData } from "../../slice/dataSlice"
 
 export async function getCardData(dispatch){
     console.log("its here");
@@ -44,7 +44,7 @@ export async function createCardData(data,dispatch,navigate){
 
 }
 
-export async function searchData(id){
+export async function searchData(id,dispatch){
     let result=null;
     try {
         const responce=await apiConnector("POST",dataEndPoints.SEARCH_DATA_API,{id})
@@ -52,6 +52,7 @@ export async function searchData(id){
             throw new Error("Data not found!")
         }
         result=responce.data.data
+        dispatch(findData(responce.data.data))
     } catch (error) {
         console.log(error);
 
