@@ -8,7 +8,7 @@ import Loader from "../components/Loader"
 
 function Home() {
   const dispatch=useDispatch()
-  const {data,loading}=useSelector((state)=>state.data)
+  const {data,loading,admin}=useSelector((state)=>state.data)
   const [toggleClick,setToggleClick]=useState(false)
   
 
@@ -49,9 +49,13 @@ function Home() {
             </p>
            
            <div className='flex flex-row lg:flex-row lg:gap-5 md:gap-3 items-center justify-center w-full lg:justify-start'> 
-           <Link to={'/createData'} class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-              Create Data
-            </Link>
+           {
+            admin?(<Link to={'/createData'} class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            Create Data
+          </Link>):(
+            <Link to={'/login'} class="mx-auto lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Login</Link>
+          )
+           }
             <button onClick={handleCache} class="mx-auto ml-4 lg:mx-0 bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
               Clear Cache
             </button>
