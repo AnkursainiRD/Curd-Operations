@@ -10,11 +10,10 @@ function Home() {
   const dispatch=useDispatch()
   const {data,loading}=useSelector((state)=>state.data)
   const [toggleClick,setToggleClick]=useState(false)
-  const [cacheData,setCacheData]=useState(false)
   
 
   const currentDate = new Date().toLocaleDateString('en-GB');
-  console.log("home render");
+  
 
   function handleCache(){
     localStorage.removeItem("CourtData");
@@ -28,14 +27,13 @@ function Home() {
         console.log(error);
     }
   }
-  console.log(loading);
   useEffect(()=>{
     getData()
   },[])  
-  console.log(data);
+  
   return (
     
-    loading?(<Loader/>):
+    loading?(<div className='w-full h-full flex items-center justify-center'><Loader/></div>):
     (
       <div class="leading-normal tracking-normal text-black gradient " >
       <div class="pt-24 bg-[linear-gradient(90deg,_#d53369_0%,_#daae51_100%)] text-white" >

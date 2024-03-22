@@ -1,4 +1,6 @@
 const CardData=require("../models/dataCardModel")
+const Admin=require("../models/adminModel")
+const bcrypt=require("bcrypt")
 
 
 exports.getAllData=async(req,res)=>{
@@ -10,12 +12,16 @@ exports.getAllData=async(req,res)=>{
                 message:"Data not found"
             })
         }
+
         return res.status(200).json({
             success:true,
             data:card
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            success:false
+        })
     }
 }
 
@@ -36,6 +42,9 @@ exports.createCardData=async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            success:false
+        })
     }
 }
 
@@ -66,7 +75,6 @@ exports.editCardData=async(req,res)=>{
     try {
         console.log("working");
         const {name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body
-        console.log(name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location);
         const {cardId}=req.body
         console.log(cardId);
         if(!cardId){
@@ -159,6 +167,40 @@ exports.itemSearchQuery=async(req,res)=>{
         })
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            success:false
+        })
     }
 }
 
+
+exports.loginUser=async(req,res)=>{
+    try {
+        const {email,password}=req.body
+        const admin=await Admin.find({email})
+        if(!admin){
+           return res.status(404).json({
+                success:false,
+                message:"No admin found"
+            })}
+        const passwordsMatch = await bcrypt.compare(password, admin[0].password);
+        if(passwordsMatch){
+            return res.status(200).json({
+                success:true
+            })  
+        }    
+        else{
+            console.log("invalid pass");
+            return res.status(401).json({
+                success:false,
+                message:"Invalid Passowrd"
+            })
+        }
+        }
+     catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false
+        })
+    }
+}

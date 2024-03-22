@@ -1,10 +1,9 @@
 import  {toast} from "react-hot-toast"
 import {apiConnector} from "../apiConnector"
 import { dataEndPoints } from "../Apis"
-import { afterDeleteData, afterEditData, findData, setData, setFilterSearch, setLoading, updateData } from "../../slice/dataSlice"
+import { afterDeleteData, afterEditData, findData, setAdmin, setData, setFilterSearch, setLoading, updateData } from "../../slice/dataSlice"
 
 export async function getCardData(dispatch){
-    console.log("its here");
     dispatch(setLoading(true))
     const toastId=toast.loading("Loading...")
     try {
@@ -120,4 +119,39 @@ export async function itemSearchApi(selected,searchValue,dispatch){
     }
     toast.dismiss(toastId)
     return result
+}
+
+
+export async function loginAdmin(data,navigate,dispatch){
+    console.log("admin here");
+    dispatch(setLoading(true))
+    try {
+        const responce=await apiConnector("POST",dataEndPoints.LOGIN_ADMIN_API,data)
+        if(!responce.data.success){
+            throw new Error("No admin found!")
+        }
+        toast.success("Login Successful")
+        dispatch(setAdmin(true))
+        localStorage.setItem("admin",true)
+        console.log(responce);
+    } catch (error) {
+        console.log(error);
+        toast.error("Couldn't fetch admin!")
+    }
+    dispatch(setLoading(false))
+    navigate('/')
+}
+
+
+export async function logout(navigate){
+    try {
+        localStorage.removeItem("CourtData")
+        localStorage.removeItem("admin")
+        toast.success("Logged out")
+        window.location.reload();
+    } catch (error) {
+        console.log(error);
+        toast.error("Error while logout")
+    }
+    navigate("/")
 }

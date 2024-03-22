@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {useDispatch, useSelector} from "react-redux"
+import { logout } from '../services/operations/DataOperations'
 
 function Navbar() {
   const [dropmenu,setDropMenu]=useState(false)
+  const {admin}=useSelector(state=>state.data)
+  const dispatch=useDispatch()
+
+  function handleSmallSSclick(){
+    setDropMenu((prev)=>!prev)
+    logout(dispatch)
+  }
+
   return (
     <nav id="header" class="fixed w-full z-30 top-0 text-black bg-white">
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -20,10 +30,12 @@ function Navbar() {
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </button>
-          <div className={`${dropmenu?("w-[100%] h-[10vh] bg-gray-600 absolute visible"):("hidden")} flex flex-col sm:top-24 rounded-md text-center`}>
+          <div className={`${dropmenu?("w-[100%] mt-8 py-2 gap-2 bg-gray-600 absolute visible"):("hidden")} flex flex-col sm:top-24 rounded-md text-center`}>
             <Link to={'/'}  onClick={()=>setDropMenu((prev)=>!prev)} className='text-white font-semibold mt-2'>Home</Link>
             <Link to={'/getAllData'} onClick={()=>setDropMenu((prev)=>!prev)} className='text-white font-semibold'>All Data</Link>
-            <Link to={'/createData'} onClick={()=>setDropMenu((prev)=>!prev)} className='text-white font-semibold'>Create</Link>
+            { admin && (<Link to={'/createData'} onClick={()=>setDropMenu((prev)=>!prev)} className='text-white font-semibold'>Create</Link>)}
+            { admin ? ( <button onClick={handleSmallSSclick} className='text-white font-semibold'>Logout</button>)
+            :(<Link to={'/login'} onClick={()=>setDropMenu((prev)=>!prev)} className='text-white font-semibold'>Login</Link> )}
           </div>
         </div>
 
@@ -32,11 +44,25 @@ function Navbar() {
             <li class="mr-3">
               <Link to="/getAllData" class="inline-block py-2 px-4 text-black font-bold no-underline" >All Data</Link>
             </li>
-            <li class="mr-3">
+           {
+            admin && (
+              <li class="mr-3">
               <Link class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/createData">Create</Link>
             </li>
+            )
+           }
             <li class="mr-3">
               <Link class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Home</Link>
+            </li>
+            <li class="mr-3">
+              {admin?(
+              <button class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" onClick={()=>logout(dispatch)}>Logout</button>
+
+              ):
+              (
+                <Link class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/login">Login</Link>
+
+              )}
             </li>
           </ul>
         </div>

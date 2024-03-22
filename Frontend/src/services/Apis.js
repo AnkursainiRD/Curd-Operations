@@ -6,5 +6,6 @@ export const dataEndPoints={
     EDIT_DATA_API: BASE_URL +"/editData",
     DELETE_DATA_API: BASE_URL +"/deleteData",
     SEARCH_DATA_API: BASE_URL +"/searchData",
-    ITEAM_SEARCH_API: BASE_URL +"/itemSearchQuery"
+    ITEAM_SEARCH_API: BASE_URL +"/itemSearchQuery",
+    LOGIN_ADMIN_API: BASE_URL +"/loginUser"
 }

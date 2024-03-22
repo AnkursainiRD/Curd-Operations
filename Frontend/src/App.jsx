@@ -6,6 +6,7 @@ import CreateData from "./pages/CreateData"
 import AllData from "./pages/AllData"
 import EditData from "./pages/EditData"
 import ConfirmationModal from "./components/ConfirmationModal"
+import Login from "./pages/Login"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/getAllData" element={<AllData/>}/>
           <Route path="/editData/:id" element={<EditData/>}/>
           <Route path="/del" element={<ConfirmationModal/>}/>
+          <Route path="/login" element={<Login/>}/>
        </Routes>
     </div>
   )

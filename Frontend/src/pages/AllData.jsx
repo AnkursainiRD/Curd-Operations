@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar'
 import ConfirmationModal from '../components/ConfirmationModal'
 
 function AllData() {
-    const {data}=useSelector((state)=>state.data)
+    const {data,admin}=useSelector((state)=>state.data)
     const [searchItem,setSearchItem]=useState(null)
     const [visibleModal,setVisibleModal]=useState(false)
     const [id,setId]=useState(null)
@@ -91,10 +91,17 @@ function AllData() {
                 <td class="px-6 py-4">
                     {card.phoneNumber}
                 </td>
-                <td class="flex items-center px-6 py-4">
-                    <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                    <button onClick={deleteData} value={`${card._id}`} class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</button>
-                </td>
+                {
+                    admin?(
+                        <td class="flex items-center px-6 py-4">
+                            <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                            <button onClick={deleteData} value={`${card._id}`} class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</button>
+                    </td>
+                    ):
+                    (
+                      <p>Unauthorized</p>  
+                    )
+                }
             </tr>
                 )))
             }

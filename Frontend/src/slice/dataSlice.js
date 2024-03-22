@@ -6,6 +6,7 @@ const intitialState={
     fileterData:[],
     foundData:null,
     loading:false,
+    admin:localStorage.getItem("admin")?(localStorage.getItem("admin")):false,
 }
 
 const dataSlice=createSlice({
@@ -14,6 +15,9 @@ const dataSlice=createSlice({
     reducers:{
         setData:(state,action)=>{
             state.data=action.payload
+        },
+        setAdmin:(state,action)=>{
+            state.admin=action.payload
         },
         updateData:(state,action)=>{
             state.data.push(action.payload)
@@ -44,5 +48,5 @@ const dataSlice=createSlice({
     }
 })
 
-export const {setData,updateData,setFilterSearch,findData,afterEditData,afterDeleteData,setLoading}=dataSlice.actions;
+export const {setData,updateData,setFilterSearch,findData,afterEditData,afterDeleteData,setLoading,setAdmin}=dataSlice.actions;
 export default dataSlice.reducer

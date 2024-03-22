@@ -9,6 +9,7 @@ function TodayData({data}) {
     const [tehsil,setTehsil]=useState("")
     const [filterData,setFilterData]=useState(null)
     const currentDate = new Date().toLocaleDateString('en-GB');
+    const {admin}=useSelector(state=>state.data)
     
     function handleChange(e){
         const city=JSON.stringify(e.target.value)
@@ -84,9 +85,16 @@ function TodayData({data}) {
                     <td class="px-6 py-4">
                         {card.phoneNumber}
                     </td>
-                    <td class="flex items-center px-6 py-4">
-                        <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                    {
+                    admin?(
+                        <td class="flex items-center px-6 py-4">
+                            <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
                     </td>
+                    ):
+                    (
+                      <p>Unauthorized</p>  
+                    )
+                }
                         </tr>)
                   
                     
