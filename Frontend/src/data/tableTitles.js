@@ -49,12 +49,12 @@ export const tehsil=[
     {
         id:1,
         city:"Sardhana",
-        value:"sardhana"
+        Teshil:"sardhana"
     },
     {
         id:1,
         city:"Meerut",
-        value:"meerut"
+        Tehsil:"meerut"
     },
 
 ]

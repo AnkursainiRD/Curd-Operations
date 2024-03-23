@@ -100,25 +100,23 @@ export async function editCardData(data,navigate,dispatch){
 
 export async function itemSearchApi(selected,searchValue,dispatch){
     const toastId=toast.loading("Loading...")
-    let result=[]
-    console.log(selected,searchValue);
     try {
         const responce=await apiConnector("POST",dataEndPoints.ITEAM_SEARCH_API,{selected,searchValue})
         if(!responce.data.success){
             throw new Error("No data found!")
         }
-        console.log(responce.data.data);
+        console.log("here");
+        console.log(responce.data);
         if(!responce.data.data.lenght===0){
-            toast.error("No Data Found!")
+           return toast.error("No Data Found!")
         }
         toast.success("Data Found")
         dispatch(setFilterSearch(responce.data.data))
     } catch (error) {
         console.log(error);
-        toast.error("Couldn't search data!")
+        toast.error("No data availble!")
     }
     toast.dismiss(toastId)
-    return result
 }
 
 

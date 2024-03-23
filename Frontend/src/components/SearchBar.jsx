@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import { tableTitle, tehsil } from '../data/tableTitles'
 import { itemSearchApi } from '../services/operations/DataOperations'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearFilterSearch } from '../slice/dataSlice'
 
 function SearchBar() {
-    const [filterdata,setFilterData]=useState(null)
+    const {fileterData}=useSelector(state=>state.data)
     const [selected,setSelected]=useState(null)
     const [searchValue,setSearchValue]=useState(null)
     const dispatch=useDispatch()
+
+
     function handleChange(e){
         setSelected(e.target.value)
+        console.log("hereee",selected);
+    }
+    if(selected=="allData"){
+        console.log("hereee",selected);
+        dispatch(clearFilterSearch())
     }
 
     function handleInputChange(e){
@@ -20,12 +28,7 @@ function SearchBar() {
         e.preventDefault()
         console.log(selected,searchValue);
         itemSearchApi(selected,searchValue,dispatch)
-        .then((res)=>{
-            console.log(res);
-            setFilterData(res)
-        })
     }
-
   return (
     <div>
            
@@ -33,14 +36,7 @@ function SearchBar() {
     <div class="flex">
         <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <select onChange={handleChange} id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">All categories 
-            <option selected>All Data</option>
-            {
-                tehsil?.map((city,index)=>(
-                    <option key={index} value={city.value} >
-                        {city.city}
-                    </option>
-                ))
-            }
+            <option  value="allData">All Data</option>
             {
                 tableTitle?.map((title)=>(
                     <option id='dropdown-button' key={title.id} value={title.value}>

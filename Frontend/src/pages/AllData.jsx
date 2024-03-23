@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar'
 import ConfirmationModal from '../components/ConfirmationModal'
 
 function AllData() {
-    const {data,admin}=useSelector((state)=>state.data)
+    const {data,admin,fileterData}=useSelector((state)=>state.data)
     const [searchItem,setSearchItem]=useState(null)
     const [visibleModal,setVisibleModal]=useState(false)
     const [id,setId]=useState(null)
@@ -37,7 +37,7 @@ function AllData() {
         // deleteCardData(id,navigate)
     }
 
-      console.log("f data: ",data);
+      console.log("f data: ",fileterData);
   return (
 
 
@@ -62,48 +62,91 @@ function AllData() {
         </thead>
         <tbody>
             {
-               !data?(<div className='text-center w-full text-2xl'>No Data</div>):
-               ( data?.map((card)=>(
-                
-                    <tr class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {card.name}
-                </th>
-                <td class="px-6 py-4">
-                    {card.nameOfCourt}
+              fileterData ?( fileterData?.map((card)=>(
+                 
+                <tr class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {card.name}
+            </th>
+            <td class="px-6 py-4">
+                {card.nameOfCourt}
+            </td>
+            <td class="px-6 py-4">
+                {card.caseNumber}
+            </td>
+            <td class="px-6 py-4">
+                {card.positionStage}
+            </td>
+            <td class="px-6 py-4">
+                {new Date(card.prevDate).toLocaleDateString('en-GB')}
+            </td>
+            <td class="px-6 py-4">
+                {new Date(card.nextDate).toLocaleDateString('en-GB')}
+            </td>
+            <td class="px-6 py-4">
+                {card.location}
+            </td>
+            <td class="px-6 py-4">
+                {card.phoneNumber}
+            </td>
+            {
+                admin?(
+                    <td class="flex items-center px-6 py-4">
+                        <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                        <button onClick={deleteData} value={`${card._id}`} class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</button>
                 </td>
-                <td class="px-6 py-4">
-                    {card.caseNumber}
-                </td>
-                <td class="px-6 py-4">
-                    {card.positionStage}
-                </td>
-                <td class="px-6 py-4">
-                    {new Date(card.prevDate).toLocaleDateString('en-GB')}
-                </td>
-                <td class="px-6 py-4">
-                    {new Date(card.nextDate).toLocaleDateString('en-GB')}
-                </td>
-                <td class="px-6 py-4">
-                    {card.location}
-                </td>
-                <td class="px-6 py-4">
-                    {card.phoneNumber}
-                </td>
-                {
-                    admin?(
-                        <td class="flex items-center px-6 py-4">
-                            <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                            <button onClick={deleteData} value={`${card._id}`} class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</button>
-                    </td>
-                    ):
-                    (
-                      <p>Unauthorized</p>  
-                    )
-                }
-            </tr>
-                )))
+                ):
+                (
+                  <p>Unauthorized</p>  
+                )
+            }
+        </tr>
+            ))):
+              (
+                !data?(<div className='text-center w-full text-2xl'>No Data</div>):
+                ( data?.map((card)=>(
+                 
+                     <tr class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                         
+                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                     {card.name}
+                 </th>
+                 <td class="px-6 py-4">
+                     {card.nameOfCourt}
+                 </td>
+                 <td class="px-6 py-4">
+                     {card.caseNumber}
+                 </td>
+                 <td class="px-6 py-4">
+                     {card.positionStage}
+                 </td>
+                 <td class="px-6 py-4">
+                     {new Date(card.prevDate).toLocaleDateString('en-GB')}
+                 </td>
+                 <td class="px-6 py-4">
+                     {new Date(card.nextDate).toLocaleDateString('en-GB')}
+                 </td>
+                 <td class="px-6 py-4">
+                     {card.location}
+                 </td>
+                 <td class="px-6 py-4">
+                     {card.phoneNumber}
+                 </td>
+                 {
+                     admin?(
+                         <td class="flex items-center px-6 py-4">
+                             <Link to={`/editData/${card._id}`} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                             <button onClick={deleteData} value={`${card._id}`} class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</button>
+                     </td>
+                     ):
+                     (
+                       <p>Unauthorized</p>  
+                     )
+                 }
+             </tr>
+                 )))
+              )
             }
             
         </tbody>

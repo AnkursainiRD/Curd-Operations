@@ -147,15 +147,18 @@ exports.itemSearchQuery=async(req,res)=>{
                   { name: searchValue },
                   { nameOfCourt: searchValue },
                   { location: searchValue },
-                  { phoneNumber:searchValue},
+                  { phoneNumber:Number(searchValue)},
                   { caseNumber: searchValue},
-                  { positionStage: searchValue}
+                  { positionStage: searchValue},
+                  { prevDate: searchValue},
+                  { nextDate: searchValue}
                 ]
               }
         })
 
         const response=await CardData.aggregate(pipeline)
-        if(!response){
+        console.log(response.length);
+        if(response.length==0){
             return res.status(404).json({
                 success:false,
                 message:"Data not found!"
