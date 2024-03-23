@@ -1,0 +1,28 @@
+{
+    "routes":[
+        {
+            "src":"/",
+            "dest":"/"
+        },
+        {
+            "src":"/createData",
+            "dest":"/" 
+        },
+        {
+            "src":"/getAllData",
+            "dest":"/"
+        },
+        {
+            "src":"/editData/:id",
+            "dest":"/" 
+        },
+        {
+            "src":"/del",
+            "dest":"/"
+        },
+        {
+            "src":"/createData",
+            "dest":"/login" 
+        }
+    ]
+}
