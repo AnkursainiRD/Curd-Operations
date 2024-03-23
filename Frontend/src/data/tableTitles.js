@@ -38,11 +38,7 @@ export const tableTitle=[
         id:8,
         title:"Phone",
         value:"phoneNumber"
-    },
-    {
-        id:9,
-        title:"Option"
-    },
+    }
 ]
 
 export const tehsil=[
