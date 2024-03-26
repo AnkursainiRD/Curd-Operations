@@ -27,14 +27,14 @@ exports.getAllData=async(req,res)=>{
 
 exports.createCardData=async(req,res)=>{
     try {
-        const {name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body;
+        const {name,secondName,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body;
         if(!name){
             return res.status(400).json({
                 success:false,
                 message:"All fileds are rquired!"
             })
         }
-        const newCard=await CardData.create({name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location})
+        const newCard=await CardData.create({name,secondName,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location})
         return res.status(200).json({
             success:true,
             message:"Card created",
@@ -73,7 +73,8 @@ exports.deleteCardData=async(req,res)=>{
 
 exports.editCardData=async(req,res)=>{
     try {
-        const {name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body
+        const {name,secondName,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body
+        console.log(name,secondName);
         const {cardId}=req.body
         if(!cardId){
             console.log("yha fta id me");
@@ -84,6 +85,7 @@ exports.editCardData=async(req,res)=>{
         }
         const updatedCard=await CardData.findById({_id:cardId})
         updatedCard.name=name,
+        updatedCard.secondName=secondName,
         updatedCard.nameOfCourt=nameOfCourt,
         updatedCard.caseNumber=caseNumber,
         updatedCard.positionStage=positionStage,
@@ -93,6 +95,7 @@ exports.editCardData=async(req,res)=>{
         updatedCard.nextDate=nextDate?(nextDate):(updatedCard.nextDate)
 
         updatedCard.save()
+        console.log(updatedCard);
         return res.status(200).json({
             success:true,
             message:"Data Updated",
@@ -130,7 +133,7 @@ exports.searchData=async(req,res)=>{
 exports.itemSearchQuery=async(req,res)=>{
     try {
         const {selected,searchValue}=req.body
-        console.log(selected);
+        console.log(searchValue);
         if(!selected && !searchValue){
             return res.status(401).json({
                 success:false,

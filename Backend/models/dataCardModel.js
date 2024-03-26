@@ -4,6 +4,9 @@ const dataCardSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    secondName:{
+        type:String
+    },
     prevDate:{
         type:Date,
         required:true

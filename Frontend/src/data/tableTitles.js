@@ -58,3 +58,41 @@ export const tehsil=[
     },
 
 ]
+
+export const courtNames=[
+    {
+        id:1,
+        court:"CJJD",
+        value:"cjjd"
+    },
+    {
+        id:2,
+        court:"ASDO",
+        value:"asdo"
+    },
+    {
+        id:3,
+        court:"SDO",
+        value:"sdo"
+    },
+    {
+        id:4,
+        court:"A.T.",
+        value:"at"
+    },
+    {
+        id:5,
+        court:"T.D.",
+        value:"td"
+    },
+    {
+        id:6,
+        court:"N.T.D",
+        value:"ntd"
+    },
+    {
+        id:7,
+        court:"SDM",
+        value:"sdm"
+    }
+]

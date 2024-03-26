@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { tableTitle } from '../data/tableTitles'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import DateDiff  from "date-diff"
-
 function TodayData({data}) {
     const [todayData,setTodayData]=useState([])
     const [tehsil,setTehsil]=useState("")
@@ -15,6 +13,8 @@ function TodayData({data}) {
         const city=JSON.stringify(e.target.value)
         const res=todayData.filter((card)=>card.location==e.target.value)
         setTehsil(res);
+        
+    console.log(todayData);
     }   
 
     function checkDate(){
@@ -60,16 +60,16 @@ function TodayData({data}) {
                   
                    <tr key={card.id} class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                      {console.log(tehsil)}   
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {card.name}
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
+                        {`${card.name} Vs ${card.secondName}`}
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 uppercase">
                         {card.nameOfCourt}
                     </td>
                     <td class="px-6 py-4">
                         {card.caseNumber}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 capitalize">
                         {card.positionStage}
                     </td>
                     <td class="px-6 py-4">
@@ -79,7 +79,7 @@ function TodayData({data}) {
                         {new Date(card.nextDate).toLocaleDateString('en-GB')}
                     </td>
                     
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 capitalize">
                         {card.location}
                     </td>
                     <td class="px-6 py-4">

@@ -53,7 +53,7 @@ function AllData() {
         <tr> {
             tableTitle?.map((title)=>(
                 
-                <th scope="col" class="px-6 py-3 text-[17px]" key={title.id}>
+                <th scope="col" class="px-6 py-3 text-[17px] capitalize" key={title.id}>
                    {title.title}  
                 </th>
            
@@ -66,16 +66,16 @@ function AllData() {
                  
                 <tr class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {card.name}
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
+                {`${card.name} Vs ${card.secondName}`} 
             </th>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 uppercase">
                 {card.nameOfCourt}
             </td>
             <td class="px-6 py-4">
                 {card.caseNumber}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 capitalize">
                 {card.positionStage}
             </td>
             <td class="px-6 py-4">
@@ -84,7 +84,7 @@ function AllData() {
             <td class="px-6 py-4">
                 {new Date(card.nextDate).toLocaleDateString('en-GB')}
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 capitalize">
                 {card.location}
             </td>
             <td class="px-6 py-4">
@@ -109,16 +109,16 @@ function AllData() {
                  
                      <tr class="bg-white border-b text-[15px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                          
-                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                     {card.name}
+                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
+                     {`${card.name} Vs ${card.secondName}`}
                  </th>
-                 <td class="px-6 py-4">
+                 <td class="px-6 py-4 uppercase">
                      {card.nameOfCourt}
                  </td>
                  <td class="px-6 py-4">
                      {card.caseNumber}
                  </td>
-                 <td class="px-6 py-4">
+                 <td class="px-6 py-4 capitalize">
                      {card.positionStage}
                  </td>
                  <td class="px-6 py-4">
@@ -127,7 +127,7 @@ function AllData() {
                  <td class="px-6 py-4">
                      {new Date(card.nextDate).toLocaleDateString('en-GB')}
                  </td>
-                 <td class="px-6 py-4">
+                 <td class="px-6 py-4 capitalize">
                      {card.location}
                  </td>
                  <td class="px-6 py-4">

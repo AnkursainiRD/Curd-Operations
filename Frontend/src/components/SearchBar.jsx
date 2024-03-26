@@ -21,7 +21,8 @@ function SearchBar() {
     }
 
     function handleInputChange(e){
-        setSearchValue(e.target.value);
+        let svalue=(e.target.value.toLowerCase())
+        setSearchValue(svalue);
     }
 
     async function handleClick(e){
