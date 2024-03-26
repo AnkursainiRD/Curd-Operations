@@ -73,10 +73,8 @@ exports.deleteCardData=async(req,res)=>{
 
 exports.editCardData=async(req,res)=>{
     try {
-        console.log("working");
         const {name,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body
         const {cardId}=req.body
-        console.log(cardId);
         if(!cardId){
             console.log("yha fta id me");
             return res.status(300).json({
