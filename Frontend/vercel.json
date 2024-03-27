@@ -13,7 +13,7 @@
             "dest":"/"
         },
         {
-            "src":"/editData/:id",
+            "src":"/editData",
             "dest":"/" 
         },
         {
