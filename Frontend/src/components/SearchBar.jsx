@@ -13,10 +13,8 @@ function SearchBar() {
 
     function handleChange(e){
         setSelected(e.target.value)
-        console.log("hereee",selected);
     }
     if(selected=="allData"){
-        console.log("hereee",selected);
         dispatch(clearFilterSearch())
     }
 
