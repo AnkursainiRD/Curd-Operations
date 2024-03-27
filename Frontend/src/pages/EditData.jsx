@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { findData } from '../slice/dataSlice';
 
 function EditData() {
-  const {register,handleSubmit,formState:{errors}}=useForm()
+  const {register,handleSubmit,reset,formState:{errors}}=useForm()
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const {id}=useParams()
@@ -17,10 +17,11 @@ function EditData() {
   useState(()=>{
     console.log(id);
     dispatch(findData(id))
+    
   },[])
 
-
-  // console.log("find data:",foundData);
+  
+  console.log("find data:",foundData);
 
 
   function updateEditData(data,id){
@@ -44,8 +45,11 @@ function EditData() {
   };
 
 
+  
+console.log(foundData);
   return (
     <div className='w-full h-full flex flex-col justify-center items-center gap-6'>
+      
       <h1 className='font-bold text-2xl'>Edit Data</h1>
         <form class="w-96 lg:w-2/4 font-bold mx-auto" onSubmit={handleSubmit(updateEditData)}>
           

@@ -28,6 +28,7 @@ exports.getAllData=async(req,res)=>{
 exports.createCardData=async(req,res)=>{
     try {
         const {name,secondName,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body;
+        console.log(name,secondName);
         if(!name){
             return res.status(400).json({
                 success:false,
@@ -52,7 +53,6 @@ exports.createCardData=async(req,res)=>{
 exports.deleteCardData=async(req,res)=>{
     try {
         const {id}=req.body
-        console.log(id);
         const card=await CardData.findById(id)
         if(!card){
             return res.status(403).json({
@@ -74,10 +74,8 @@ exports.deleteCardData=async(req,res)=>{
 exports.editCardData=async(req,res)=>{
     try {
         const {name,secondName,nameOfCourt,prevDate,caseNumber,positionStage,nextDate,phoneNumber,location}=req.body
-        console.log(name,secondName);
         const {cardId}=req.body
         if(!cardId){
-            console.log("yha fta id me");
             return res.status(300).json({
                 success:false,
                 message:"Card id missing!"
@@ -95,7 +93,6 @@ exports.editCardData=async(req,res)=>{
         updatedCard.nextDate=nextDate?(nextDate):(updatedCard.nextDate)
 
         updatedCard.save()
-        console.log(updatedCard);
         return res.status(200).json({
             success:true,
             message:"Data Updated",
@@ -133,7 +130,6 @@ exports.searchData=async(req,res)=>{
 exports.itemSearchQuery=async(req,res)=>{
     try {
         const {selected,searchValue}=req.body
-        console.log(searchValue);
         if(!selected && !searchValue){
             return res.status(401).json({
                 success:false,
@@ -158,7 +154,7 @@ exports.itemSearchQuery=async(req,res)=>{
         })
 
         const response=await CardData.aggregate(pipeline)
-        console.log(response.length);
+        
         if(response.length==0){
             return res.status(404).json({
                 success:false,
