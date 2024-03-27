@@ -1,28 +1,6 @@
+
 {
-    "routes":[
-        {
-            "src":"/",
-            "dest":"/"
-        },
-        {
-            "src":"/createData",
-            "dest":"/" 
-        },
-        {
-            "src":"/getAllData",
-            "dest":"/"
-        },
-        {
-            "src":"/editData",
-            "dest":"/" 
-        },
-        {
-            "src":"/del",
-            "dest":"/"
-        },
-        {
-            "src":"/createData",
-            "dest":"/login" 
-        }
+    "rewrites": [
+        {"source": "/(.*)", "destination": "/"}
     ]
 }
