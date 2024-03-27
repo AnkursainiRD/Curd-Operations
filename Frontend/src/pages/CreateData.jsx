@@ -1,20 +1,28 @@
 import React from 'react'
 import {useForm} from "react-hook-form"
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createCardData } from '../services/operations/DataOperations';
 import { courtNames, tehsil } from '../data/tableTitles';
+import toast from 'react-hot-toast';
 
 
 function CreateData() {
   const {register,handleSubmit,formState:{errors}}=useForm()
+  const {data}=useSelector(state=>state.data)
   const dispatch=useDispatch()
   const navigate=useNavigate()
 
-  function saveData(data){
-    console.log(data);
-       createCardData(data,dispatch,navigate)
-    
+  function saveData(formData){
+    let result=data.find(obj=>obj.caseNumber== formData.caseNumber)
+    console.log(result,typeof formData.caseNumber);
+      if(!result)
+      {
+        createCardData(formData,dispatch,navigate)
+      }
+      else{
+        toast.error("Case Number already exists!")
+      }    
   }
 
 
