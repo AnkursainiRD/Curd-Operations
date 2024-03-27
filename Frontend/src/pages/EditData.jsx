@@ -5,6 +5,7 @@ import { editCardData, searchData } from '../services/operations/DataOperations'
 import { courtNames, tehsil } from '../data/tableTitles';
 import { useDispatch, useSelector } from 'react-redux';
 import { findData } from '../slice/dataSlice';
+import {toast} from 'react-hot-toast';
 
 function EditData() {
   const {register,handleSubmit,reset,formState:{errors}}=useForm()
@@ -12,7 +13,7 @@ function EditData() {
   const dispatch=useDispatch()
   const {id}=useParams()
   const [cardId,setCardId]=useState(id)
-  const {foundData}=useSelector(state=>state.data)
+  const {foundData,data}=useSelector(state=>state.data)
  
   useState(()=>{
     console.log(id);
@@ -24,17 +25,23 @@ function EditData() {
   console.log("find data:",foundData);
 
 
-  function updateEditData(data,id){
+  function updateEditData(fourmData,id){
     console.log(cardId);
-    if(data.prevDate && data.nextDate==""){
-      data.prevDate=editCard.prevDate
-      data.nextDate= editCard.nextDate
+    if(fourmData.prevDate && data.nextDate==""){
+      fourmData.prevDate=editCard.prevDate
+      fourmData.nextDate= editCard.nextDate
       console.log(editCard.prevDate);
     }
-    console.log(data);
-
-    data.cardId=cardId
-    editCardData(data,navigate,dispatch)
+    console.log(fourmData);
+    let result=data.find(obj=>obj.caseNumber== fourmData.caseNumber)
+      if(!result)
+      {
+        fourmData.cardId=cardId
+        editCardData(fourmData,navigate,dispatch)  }
+      else{
+        toast.error("Case Number already exists!")
+      }
+    
   };
 
   const registerWithLowercase = (name,options) => {
